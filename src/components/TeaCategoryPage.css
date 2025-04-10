@@ -1,0 +1,23 @@
+.category-page {
+    padding: 40px;
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 per row */
+    gap: 30px;
+  }
+  
+  .product-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    background: white;
+    text-align: center;
+  }
+  
+  .product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+  
