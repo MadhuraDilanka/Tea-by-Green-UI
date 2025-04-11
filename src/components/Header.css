@@ -11,15 +11,38 @@
 
 .header-bg-image {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  z-index: 0;
+}
+
+.header-bg-image.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.zoom-layer {
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
-  animation: fadeZoom 6s ease-in-out forwards;
-  z-index: 1;
+  transform: scale(1); /* start zoom */
+  transition: transform 10s ease-in-out;
+}
 
+.header-bg-image.active .zoom-layer {
+  transform: scale(1.08); /* zoom effect */
+}
+
+
+@keyframes fadeZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.08);
+  }
 }
 
 .header-top,
@@ -91,7 +114,7 @@
 
 .hero-text {
   text-align: left;
-  padding: 80px 60px;
+  padding: 25vh 150px 10vh;
   max-width: 600px;
 }
 
@@ -122,13 +145,33 @@
   color: white;
 }
 
-@keyframes fadeZoom {
+@keyframes fadeSlideUp {
   0% {
-    opacity: 0.8;        /* was 0 — now starts more visible */
-    transform: scale(1);
+    opacity: 0;
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
-    transform: scale(1.05); /* more subtle zoom than 1.07 */
+    transform: translateY(0);
   }
+}
+
+.hero-text h1,
+.hero-text p,
+.hero-text .shop-btn {
+  opacity: 0;
+  animation: fadeSlideUp 1s ease-out forwards;
+}
+
+/* Staggered appearance */
+.hero-text h1 {
+  animation-delay: 0.3s;
+}
+
+.hero-text p {
+  animation-delay: 0.6s;
+}
+
+.hero-text .shop-btn {
+  animation-delay: 0.9s;
 }

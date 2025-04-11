@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "./BestSellers.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -8,12 +8,14 @@ const BestSellers = ({ onAddToCart }) => {
   const [quantities, setQuantities] = useState({});
   const [startIndex, setStartIndex] = useState(0);
   const itemsPerView = 4;
+  const sectionRef = useRef(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     axios.get("https://localhost:7168/api/products")
       .then(res => {
         const sorted = [...res.data].sort((a, b) => b.price - a.price);
-        const top = sorted.slice(0, 8); // Show 8 to support sliding
+        const top = sorted.slice(0, 8); // Top 8 best sellers
         setBestsellers(top);
 
         const qty = {};
@@ -21,6 +23,17 @@ const BestSellers = ({ onAddToCart }) => {
         setQuantities(qty);
       })
       .catch(err => console.error("API Error:", err));
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.2 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
   const handleQtyChange = (id, value) => {
@@ -33,7 +46,7 @@ const BestSellers = ({ onAddToCart }) => {
   };
 
   return (
-    <section className="best-sellers-section">
+    <section className={`best-sellers-section ${visible ? "visible" : ""}`} ref={sectionRef}>
       <h2>🌟 Best Sellers</h2>
       <div className="product-carousel">
         <button className="arrow" onClick={() => setStartIndex(Math.max(0, startIndex - 1))} disabled={startIndex === 0}>

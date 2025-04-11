@@ -11,7 +11,7 @@ const Header = ({ onCartClick, cartCount, showBanner = true }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setBgIndex(prev => (prev + 1) % images.length);
-    }, 8000);
+    }, 7000); // Change every 7 seconds
     return () => clearInterval(interval);
   }, []);
 
@@ -27,11 +27,14 @@ const Header = ({ onCartClick, cartCount, showBanner = true }) => {
     <div className="header-container">
       {showBanner && (
         <div className="header-bg">
-          <div
-            key={bgIndex}
-            className="header-bg-image"
-            style={{ backgroundImage: `url(${images[bgIndex]})` }}
-          />
+          {images.map((img, index) => (
+            <div
+              key={index}
+              className={`header-bg-image ${index === bgIndex ? 'active' : ''}`}
+            >
+              <div className="zoom-layer" style={{ backgroundImage: `url(${img})` }} />
+            </div>
+          ))}
 
           <div className={`header-top ${scrolled ? "sticky" : ""}`}>
             <Link to="/" className="logo">Tea by Green</Link>
