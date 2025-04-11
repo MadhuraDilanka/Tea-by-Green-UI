@@ -6,41 +6,57 @@ const teaTypes = [
   {
     title: "Green Tea",
     image: "/green-tea.jpg",
-    link: "#green",
+    link: "/green-tea",
   },
   {
     title: "Herbal Tea",
     image: "/herbal-tea.jpg",
-    link: "#herbal",
+    link: "/herbal-tea",
   },
   {
     title: "Black Tea",
     image: "/black-tea.jpg",
-    link: "#black",
+    link: "/black-tea",
   },
   {
     title: "Gift Sets",
     image: "/gift-tea.jpg",
-    link: "#gifts",
+    link: "/gift-sets",
   },
 ];
 
 const TeaTypesCarousel = () => {
-  const [index, setIndex] = useState(0);
+  const [startIndex, setStartIndex] = useState(0);
+  const visibleCount = 2;
 
-  const prev = () => setIndex((prev) => (prev === 0 ? teaTypes.length - 1 : prev - 1));
-  const next = () => setIndex((prev) => (prev + 1) % teaTypes.length);
+  const handlePrev = () => {
+    if (startIndex > 0) setStartIndex(startIndex - 1);
+  };
+
+  const handleNext = () => {
+    if (startIndex + visibleCount < teaTypes.length) setStartIndex(startIndex + 1);
+  };
 
   return (
     <div className="carousel-wrapper">
       <div className="carousel">
-        <button className="arrow left" onClick={prev}><FaChevronLeft /></button>
-        <div className="tea-slide">
-          <img src={teaTypes[index].image} alt={teaTypes[index].title} />
-          <h2>{teaTypes[index].title}</h2>
-          <a href={teaTypes[index].link} className="shop-btn">Shop Now</a>
+        <button className="arrow left" onClick={handlePrev} disabled={startIndex === 0}>
+          <FaChevronLeft />
+        </button>
+
+        <div className="tea-multi-slide-wrapper">
+          {teaTypes.slice(startIndex, startIndex + visibleCount).map((type, idx) => (
+            <div className="tea-slide" key={idx}>
+              <img src={type.image} alt={type.title} />
+              <h2>{type.title}</h2>
+              <a href={type.link} className="shop-btn">Shop Now</a>
+            </div>
+          ))}
         </div>
-        <button className="arrow right" onClick={next}><FaChevronRight /></button>
+
+        <button className="arrow right" onClick={handleNext} disabled={startIndex + visibleCount >= teaTypes.length}>
+          <FaChevronRight />
+        </button>
       </div>
     </div>
   );

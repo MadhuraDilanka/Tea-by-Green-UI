@@ -11,7 +11,7 @@ const Header = ({ onCartClick, cartCount, showBanner = true }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setBgIndex(prev => (prev + 1) % images.length);
-    }, 4000);
+    }, 8000);
     return () => clearInterval(interval);
   }, []);
 
@@ -25,12 +25,14 @@ const Header = ({ onCartClick, cartCount, showBanner = true }) => {
 
   return (
     <div className="header-container">
-      {/* ✅ Show background + hero only on homepage */}
       {showBanner && (
-        <div
-          className="header-bg"
-          style={{ backgroundImage: `url(${images[bgIndex]})` }}
-        >
+        <div className="header-bg">
+          <div
+            key={bgIndex}
+            className="header-bg-image"
+            style={{ backgroundImage: `url(${images[bgIndex]})` }}
+          />
+
           <div className={`header-top ${scrolled ? "sticky" : ""}`}>
             <Link to="/" className="logo">Tea by Green</Link>
             <nav className="nav">
@@ -59,7 +61,6 @@ const Header = ({ onCartClick, cartCount, showBanner = true }) => {
         </div>
       )}
 
-      {/* ✅ Show simple header when not on homepage */}
       {!showBanner && (
         <div className="header-top header-top-static">
           <Link to="/" className="logo">Tea by Green</Link>

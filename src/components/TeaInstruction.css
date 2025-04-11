@@ -1,0 +1,51 @@
+.tea-instruction-modern {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 60px 40px;
+    background-color: #fdf6e3;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .instruction-image {
+    flex: 1 1 400px;
+    max-width: 500px;
+  }
+  
+  .instruction-image img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .instruction-text {
+    flex: 1 1 400px;
+    max-width: 600px;
+  }
+  
+  .instruction-text h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+    color: #333;
+  }
+  
+  .instruction-text p {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #555;
+  }
+  
+  .instruction-text ul {
+    padding-left: 20px;
+    list-style: square;
+    color: #333;
+  }
+  
+  .instruction-text li {
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  

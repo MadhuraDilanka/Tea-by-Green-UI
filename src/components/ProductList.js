@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./ProductList.css";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const ProductList = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
   const [quantities, setQuantities] = useState({});
   const [startIndex, setStartIndex] = useState(0);
-const itemsPerView = 4;
-
+  const itemsPerView = 4;
 
   useEffect(() => {
     axios.get("https://localhost:7168/api/products")
@@ -31,12 +31,12 @@ const itemsPerView = 4;
 
   return (
     <div className="product-carousel-wrapper">
-      <h2 className="carousel-title">Our Tea Packets</h2>
+      <h2 className="carousel-title">Our Tea Products</h2>
       <div className="product-carousel">
-        <button className="arrow left" onClick={() => setStartIndex(prev => Math.max(0, prev - itemsPerView))} disabled={startIndex === 0}>
-          &#8592;
+        <button className="arrow" onClick={() => setStartIndex(Math.max(0, startIndex - 1))} disabled={startIndex === 0}>
+          <FaChevronLeft />
         </button>
-  
+
         <div className="product-list">
           {products.slice(startIndex, startIndex + itemsPerView).map(product => (
             <div className="product-card" key={product.id}>
@@ -60,14 +60,13 @@ const itemsPerView = 4;
             </div>
           ))}
         </div>
-  
-        <button className="arrow right" onClick={() => setStartIndex(prev => Math.min(products.length - itemsPerView, prev + itemsPerView))} disabled={startIndex + itemsPerView >= products.length}>
-          &#8594;
+
+        <button className="arrow" onClick={() => setStartIndex(Math.min(products.length - itemsPerView, startIndex + 1))} disabled={startIndex + itemsPerView >= products.length}>
+          <FaChevronRight />
         </button>
       </div>
     </div>
   );
-  
 };
 
 export default ProductList;

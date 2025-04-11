@@ -5,7 +5,11 @@ import ProductList from "./components/ProductList";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import TeaTypesCarousel from "./components/TeaTypesCarousel";
-import TeaCategoryPage from "./components/TeaCategoryPage"; // ✅ Use your existing one
+import TeaCategoryPage from "./components/TeaCategoryPage";
+import TeaInstruction from "./components/TeaInstruction";
+import BestSellers from "./components/BestSellers";
+import CustomerReviews from "./components/CustomerReviews";
+import AboutBrand from "./components/AboutBrand";
 
 
 const AppContent = () => {
@@ -50,7 +54,11 @@ const AppContent = () => {
         <Route path="/" element={
           <>
             <TeaTypesCarousel />
+            <BestSellers onAddToCart={handleAddToCart} />
             <ProductList onAddToCart={handleAddToCart} />
+            <TeaInstruction />
+            <CustomerReviews />
+            <AboutBrand />
           </>
         } />
         <Route path="/black-tea" element={<TeaCategoryPage category="Black Tea" onAddToCart={handleAddToCart} />} />

@@ -1,0 +1,87 @@
+.about-brand-modern {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+    background-color: #fefefe;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .about-image {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+  
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+
+  .about-image.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  
+  .about-content {
+    max-width: 800px;
+  }
+  
+  .about-content h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #2d2d2d;
+  }
+  
+  .about-content p {
+    font-size: 17px;
+    color: #444;
+    margin-bottom: 20px;
+    line-height: 1.7;
+  }
+  
+  .about-highlights {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .about-highlights li {
+    background: #f4f4f4;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .about-highlights .icon {
+    color: #3c763d;
+    font-size: 18px;
+  }
+  
+  .about-mission {
+    font-style: italic;
+    color: #555;
+    margin-top: 20px;
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  
